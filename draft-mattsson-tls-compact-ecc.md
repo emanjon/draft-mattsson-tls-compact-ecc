@@ -10,7 +10,7 @@
 # Any other content can be edited, but be careful not to introduce errors.
 # Some fields will be set automatically during setup if they are unchanged.
 #
-# Don't include "-00" or "-latest" in the filename.
+# Don't include "-00" or "-latest" in the filename
 # Labels in the form draft-<yourname>-<workgroup>-<name>-latest are used by
 # the tools to refer to the current version; see "docname" for example.
 #
