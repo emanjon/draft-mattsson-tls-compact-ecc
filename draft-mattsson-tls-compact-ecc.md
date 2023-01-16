@@ -119,7 +119,7 @@ The resulting groups are called secp256r1_compact, secp384r1_compact, and secp52
 
 ## Example Compact ECDHE Encoding
 
-The following shows an example compact ECDHE encoding. {{ecdhe-old}} shows a 65 bytes ecdsa_secp256r1_sha256 UncompressedPointRepresentation structure. 
+The following shows an example compact ECDHE encoding. {{ecdhe-old}} shows a 65 bytes ecdsa_secp256r1_sha256 UncompressedPointRepresentation structure.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
 04 A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98
@@ -177,8 +177,7 @@ This document specifies a new optimal fixed-length encoding for the algorithms. 
            }
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-the SEQUENCE type, INTEGER type, and length fields are omitted and if necessary the two INTEGER value fields are truncated or left padded with zeroes to the fixed length L. For secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes respectively. The resulting signatures are called ecdsa_secp256r1_sha256_compact, 
-ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes respectively. The new encodings reduce the size of the signatures with an average of 7 bytes. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque signature field contains the compressed Ecdsa-Sig-Value.
+the SEQUENCE type, INTEGER type, and length fields are omitted and if necessary the two INTEGER value fields are truncated or left padded with zeroes to the fixed length L. For secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes respectively. The resulting signatures are called ecdsa_secp256r1_sha256_compact, ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes respectively. The new encodings reduce the size of the signatures with an average of 7 bytes. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque signature field contains the compressed Ecdsa-Sig-Value.
 
 | Value | Description | Recommended | Reference |
 | TBD4 | ecdsa_secp256r1_sha256_compact | Y | [This-Document] |
