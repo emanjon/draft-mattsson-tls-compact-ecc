@@ -19,8 +19,8 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "Compact ECDHE and ECDSA Encodings for TLS 1.3"
+abbrev: "Compact ECDSA and ECDHE"
 category: info
 
 docname: draft-todo-yourname-protocol-latest
