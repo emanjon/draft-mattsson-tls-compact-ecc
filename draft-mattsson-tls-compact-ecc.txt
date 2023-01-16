@@ -134,10 +134,11 @@ Table of Contents
 
    The resulting groups are called secp256r1_compact, secp384r1_compact,
    and secp521r1_compact.  The new encodings have CompactRepresentation
-   of length 32, 48, and 66 bytes, and reduce the size with 33, 49, and
-   67 bytes respectively.  For secp256r1_compact, secp384r1_compact, and
-   secp521r1_compact the opaque key_exchange field contains the
-   serialized value of the CompactRepresentation struct:
+   structures of length 32, 48, and 66 bytes, and reduce the size with
+   33, 49, and 67 bytes respectively.  For secp256r1_compact,
+   secp384r1_compact, and secp521r1_compact the opaque key_exchange
+   field contains the serialized value of the CompactRepresentation
+   struct:
 
        +=======+===================+=============+=================+
        | Value | Description       | Recommended | Reference       |
@@ -260,10 +261,10 @@ Table of Contents
 
 4.1.  Example Compact ECDSA Encoding
 
-   The following shows an example compact ECDSA encoding certificate.
-   Figure 3 shows a 71 bytes DER encoded ecdsa_secp256r1_sha256 ECDSA-
-   Sig-Value structure.  The values on the left are the ASN.1 tag (in
-   hexadecimal) and the length (in decimal).
+   The following shows an example compact ECDSA encoding.  Figure 3
+   shows a 71 bytes DER encoded ecdsa_secp256r1_sha256 ECDSA-Sig-Value
+   structure.  The values on the left are the ASN.1 tag (in hexadecimal)
+   and the length (in decimal).
 
    30  69: SEQUENCE {
    02  33:  INTEGER

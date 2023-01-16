@@ -1234,7 +1234,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       } CompactRepresentation;
 </pre><a href="#section-3-4" class="pilcrow">¶</a>
 </div>
-<p id="section-3-5">The resulting groups are called secp256r1_compact, secp384r1_compact, and secp521r1_compact. The new encodings have CompactRepresentation of length 32, 48, and 66 bytes, and reduce the size with 33, 49, and 67 bytes respectively. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque key_exchange field contains the serialized value of the CompactRepresentation struct:<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-5">The resulting groups are called secp256r1_compact, secp384r1_compact, and secp521r1_compact. The new encodings have CompactRepresentation structures of length 32, 48, and 66 bytes, and reduce the size with 33, 49, and 67 bytes respectively. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque key_exchange field contains the serialized value of the CompactRepresentation struct:<a href="#section-3-5" class="pilcrow">¶</a></p>
 <span id="name-compact-ecdhe-groups"></span><div id="ecdhe-table">
 <table class="center" id="table-1">
         <caption>
@@ -1403,7 +1403,7 @@ D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01 51
         <h3 id="name-example-compact-ecdsa-encod">
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-example-compact-ecdsa-encod" class="section-name selfRef">Example Compact ECDSA Encoding</a>
         </h3>
-<p id="section-4.1-1">The following shows an example compact ECDSA encoding certificate. <a href="#ecdsa-old" class="auto internal xref">Figure 3</a> shows a 71 bytes DER encoded ecdsa_secp256r1_sha256 ECDSA-Sig-Value structure. The values on the left are the ASN.1 tag (in hexadecimal) and the length (in decimal).<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">The following shows an example compact ECDSA encoding. <a href="#ecdsa-old" class="auto internal xref">Figure 3</a> shows a 71 bytes DER encoded ecdsa_secp256r1_sha256 ECDSA-Sig-Value structure. The values on the left are the ASN.1 tag (in hexadecimal) and the length (in decimal).<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <span id="name-ecdsa_secp256r1_sha256"></span><div id="ecdsa-old">
 <figure id="figure-3">
           <div class="alignLeft art-text artwork" id="section-4.1-2.1">
