@@ -366,7 +366,8 @@ Table of Contents
 
 Acknowledgments
 
-   TODO acknowledge.
+   The authors want to thank Erik Thormarker for their valuable comments
+   and feedback.
 
 Author's Address
 
