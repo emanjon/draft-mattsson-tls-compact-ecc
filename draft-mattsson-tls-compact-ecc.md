@@ -229,4 +229,4 @@ IANA is requested to update the TLS SignatureScheme registry {{RFC8447}} under t
 # Acknowledgments
 {:numbered="false"}
 
-TODO acknowledge.
+The authors want to thank {{{Erik Thormarker}}} for their valuable comments and feedback.
