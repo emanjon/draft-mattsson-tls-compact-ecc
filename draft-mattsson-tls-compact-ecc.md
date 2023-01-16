@@ -1,7 +1,7 @@
 ---
 title: "Compact ECDHE and ECDSA Encodings for TLS 1.3"
 abbrev: "Compact ECDSA and ECDHE"
-category: info
+category: std
 
 docname: draft-mattsson-tls-compact-ecc-latest
 submissiontype: IETF  # also: "independent", "IAB", or "IRTF"
