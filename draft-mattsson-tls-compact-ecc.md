@@ -84,7 +84,7 @@ The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and t
 
 # Introduction
 
-The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 have significant overhead and the ECDSA encodings produces variable-length signatures. This document defines new optimal fixed-length encodings and registers new ECDHE groups and ECDSA signature algorithms using these new encodings. The new encodings reduce the size of the ECDHE groups with 33, 49, and 67 bytes and the ECDSA algorithms with an average of 7 bytes. These new encodings also work in DTLS 1.3 {{RFC9147}} and are especially useful in cTLS {{I-D.ietf-tls-ctls}}. When secp256r1 and ecdsa_secp256r1_sha256 are used as a replacement for the the old encdoding such as in the cTLS template-based specialization mechanism they reduce the size of the TLS handshake with on average 80 bytes.
+The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 have significant overhead and the ECDSA encodings produces variable-length signatures. This document defines new optimal fixed-length encodings and registers new ECDHE groups and ECDSA signature algorithms using these new encodings. The new encodings reduce the size of the ECDHE groups with 33, 49, and 67 bytes and the ECDSA algorithms with an average of 7 bytes. These new encodings also work in DTLS 1.3 {{RFC9147}} and are especially useful in cTLS {{I-D.ietf-tls-ctls}}. When secp256r1 and ecdsa_secp256r1_sha256 are used as a replacement for the the old encdoding in e.g., the cTLS template-based specialization mechanism they reduce the size of the TLS handshake with on average 80 bytes.
 
 # Conventions and Definitions
 
@@ -178,7 +178,7 @@ This document specifies a new optimal fixed-length encoding for the algorithms. 
       }
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-the SEQUENCE type, INTEGER type, and length fields are omitted and if necessary the two INTEGER value fields are truncated (a single zero byte) or left padded with zeroes to the fixed length L. For secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes respectively. The resulting signatures are called ecdsa_secp256r1_sha256_compact, ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes respectively. The new encodings reduce the size of the signatures with an average of 7 bytes. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque signature field contains the compressed Ecdsa-Sig-Value.
+the SEQUENCE type, INTEGER type, and length fields are omitted and if necessary the two INTEGER value fields are truncated (at most a single zero byte) or left padded with zeroes to the fixed length L. For secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes respectively. The resulting signatures are called ecdsa_secp256r1_sha256_compact, ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes respectively. The new encodings reduce the size of the signatures with an average of 7 bytes. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque signature field contains the compressed Ecdsa-Sig-Value.
 
 | Value | Description | Recommended | Reference |
 | TBD4 | ecdsa_secp256r1_sha256_compact | Y | [This-Document] |
@@ -216,7 +216,7 @@ The following shows an example compact ECDSA encoding. {{ecdsa-old}} shows a 71 
 
 # Security Considerations
 
-Compact representation of ECDHE key shares does not change any requirements on point validation. Using compact representation has some security benefits. As described in {{SafeCurves}} it helps to protect against invalid-curve attacks as an implementation will naturally detect invalid inputs when it reconstructs the missing coordinate. As not even the sign of the y-coordinate is encoded, compact representation trivially avoids so called "benign malleability" attacks where an attacker changes the sign, see {{SECG}}.
+Compact representation of a ECDHE key share produces the same shared secret as the uncompressed encoding and does not change any requirements on point validation. Using compact representation has some security benefits. As described in {{SafeCurves}} it helps to protect against invalid-curve attacks as an implementation will naturally detect invalid inputs when it reconstructs the missing coordinate. As not even the sign of the y-coordinate is encoded, compact representation trivially avoids so called "benign malleability" attacks where an attacker changes the sign, see {{SECG}}.
 
 
 # IANA Considerations
