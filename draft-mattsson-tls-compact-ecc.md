@@ -123,19 +123,19 @@ The resulting groups are called secp256r1_compact, secp384r1_compact, and secp52
 The following shows an example compact ECDHE encoding. {{ecdhe-old}} shows a 65 bytes ecdsa_secp256r1_sha256 UncompressedPointRepresentation structure.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-04 A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98
-94 D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01
-51 81 26 77 C4 D6 D2 23 7E 85 CF 01 D6 91 0C FB
-83 95 4E 76 BA 73 52 83 05 34 15 98 97 E8 06 57
-80
+          04 A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98
+          94 D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01
+          51 81 26 77 C4 D6 D2 23 7E 85 CF 01 D6 91 0C FB
+          83 95 4E 76 BA 73 52 83 05 34 15 98 97 E8 06 57
+          80
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #ecdhe-old title="secp256r1"}
 
 {{ecdhe-new}} shows the 32 bytes secp256r1_compact CompactRepresentation structure encoding of the same key share.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98 94
-D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01 51
+          A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98 94
+          D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01 51
 ~~~~~~~~~~~~~~~~~~~~~~~
 {: #ecdhe-new title="secp256r1_compact"}
 
@@ -172,10 +172,10 @@ The variable-length encoding of the ECDSA signature algorithms ecdsa_secp256r1_s
 This document specifies a new optimal fixed-length encoding for the algorithms. The new encoding is defined as a compression of the DER-encoded ECDSA-Sig-Value structure. Given a DER-encoded ECDSA-Sig-Value structure {{RFC5480}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~
-           Ecdsa-Sig-Value ::= SEQUENCE {
-               r       INTEGER,
-               s       INTEGER
-           }
+      Ecdsa-Sig-Value ::= SEQUENCE {
+          r       INTEGER,
+          s       INTEGER
+      }
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 the SEQUENCE type, INTEGER type, and length fields are omitted and if necessary the two INTEGER value fields are truncated (a single zero byte) or left padded with zeroes to the fixed length L. For secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes respectively. The resulting signatures are called ecdsa_secp256r1_sha256_compact, ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes respectively. The new encodings reduce the size of the signatures with an average of 7 bytes. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque signature field contains the compressed Ecdsa-Sig-Value.
