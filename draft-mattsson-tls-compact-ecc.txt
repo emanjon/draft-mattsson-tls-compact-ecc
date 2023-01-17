@@ -161,19 +161,19 @@ Table of Contents
    shows a 65 bytes ecdsa_secp256r1_sha256
    UncompressedPointRepresentation structure.
 
-   04 A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98
-   94 D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01
-   51 81 26 77 C4 D6 D2 23 7E 85 CF 01 D6 91 0C FB
-   83 95 4E 76 BA 73 52 83 05 34 15 98 97 E8 06 57
-   80
+             04 A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98
+             94 D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01
+             51 81 26 77 C4 D6 D2 23 7E 85 CF 01 D6 91 0C FB
+             83 95 4E 76 BA 73 52 83 05 34 15 98 97 E8 06 57
+             80
 
                             Figure 1: secp256r1
 
    Figure 2 shows the 32 bytes secp256r1_compact CompactRepresentation
    structure encoding of the same key share.
 
-   A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98 94
-   D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01 51
+             A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98 94
+             D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01 51
 
                         Figure 2: secp256r1_compact
 
@@ -234,10 +234,10 @@ Table of Contents
    encoded ECDSA-Sig-Value structure.  Given a DER-encoded ECDSA-Sig-
    Value structure [RFC5480]
 
-              Ecdsa-Sig-Value ::= SEQUENCE {
-                  r       INTEGER,
-                  s       INTEGER
-              }
+         Ecdsa-Sig-Value ::= SEQUENCE {
+             r       INTEGER,
+             s       INTEGER
+         }
 
    the SEQUENCE type, INTEGER type, and length fields are omitted and if
    necessary the two INTEGER value fields are truncated (a single zero
