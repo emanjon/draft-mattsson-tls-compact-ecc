@@ -103,8 +103,8 @@ Table of Contents
    7 bytes.  These new encodings also work in DTLS 1.3 [RFC9147] and are
    especially useful in cTLS [I-D.ietf-tls-ctls].  When secp256r1 and
    ecdsa_secp256r1_sha256 are used as a replacement for the the old
-   encdoding in e.g., the cTLS template-based specialization mechanism
-   they reduce the size of the TLS handshake with on average 80 bytes.
+   encdodings they reduce the size of the TLS handshake with on average
+   80 bytes.
 
 2.  Conventions and Definitions
 
