@@ -36,10 +36,11 @@ author:
 normative:
 
   RFC2119:
+  RFC5480:
   RFC8174:
   RFC8446:
   RFC8447:
-
+  RFC8447:
 informative:
 
   RFC6090:
@@ -83,7 +84,7 @@ The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and t
 
 # Introduction
 
-The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 have significant overhead and the ECDSA encodings produces variable-length signatures. This document defines new optimal fixed-length encodings and registers new ECDHE groups and ECDSA signature algorithms using these new encodings. The new encodings reduce the size of the ECDHE groups with 33, 49, and 67 bytes and the ECDSA algorithms with an average of 7 bytes. These new encodings also work in DTLS 1.3 {{RFC9147}} and are especially useful in cTLS {{I-D.ietf-tls-ctls}}.
+The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 have significant overhead and the ECDSA encodings produces variable-length signatures. This document defines new optimal fixed-length encodings and registers new ECDHE groups and ECDSA signature algorithms using these new encodings. The new encodings reduce the size of the ECDHE groups with 33, 49, and 67 bytes and the ECDSA algorithms with an average of 7 bytes. These new encodings also work in DTLS 1.3 {{RFC9147}} and are especially useful in cTLS {{I-D.ietf-tls-ctls}}. When secp256r1 and ecdsa_secp256r1_sha256 are used as a replacement for the the old encdoding such as in the cTLS template-based specialization mechanism they reduce the size of the TLS handshake with on average 80 bytes.
 
 # Conventions and Definitions
 
@@ -91,7 +92,7 @@ The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and t
 
 # Compact ECDHE Encoding
 
-The encoding of the ECDHE groups secp256r1, secp384r1, and secp521r1 have significant overhead. This document specifies a new optimal fixed-length encoding for the groups. The new encoding is defined as a compression of the UncompressedPointRepresentation structure. Given a UncompressedPointRepresentation structure
+The encoding of the ECDHE groups secp256r1, secp384r1, and secp521r1 have significant overhead. This document specifies a new optimal fixed-length encoding for the groups. The new encoding is defined as a compression of the UncompressedPointRepresentation structure. Given a UncompressedPointRepresentation structure {{RFC8446}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~
       struct {
@@ -140,7 +141,7 @@ D1 3B EF B2 21 B3 DE F2 EB E3 83 0E AC 8F 01 51
 
 ## Implementation Considerations for Compact Representation
 
-For compatibility with APIs a compressed y-coordinate might be required. For validation or for compatibility with APIs that do not support the full {{SECG}} format an uncompressed y-coordinate might be required:
+For compatibility with APIs a compressed y-coordinate might be required. For validation or for compatibility with APIs that do not support the full {{SECG}} format an uncompressed y-coordinate might be required (using the notation in {{SECG}}):
 
 * If a compressed y-coordinate is required, then the value ~yp set to zero can be used. The compact representation described above can in such a case be transformed into the SECG point compressed format by prepending X with the single byte 0x02 (i.e., M = 0x02 \|\| X).
 * If an uncompressed y-coordinate is required, then a y-coordinate has to be calculated following Section 2.3.4 of {{SECG}} or Appendix C of {{RFC6090}}. Any of the square roots (see {{SECG}} or {{RFC6090}}) can be used. The uncompressed SECG format is M = 0x04 \|\| X \|\| Y.
@@ -168,7 +169,7 @@ Note that this does not guarantee that (x, y) is on the correct elliptic curve. 
 
 The variable-length encoding of the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 specified in {{RFC8446}} have significant overhead.
 
-This document specifies a new optimal fixed-length encoding for the algorithms. The new encoding is defined as a compression of the DER-encoded ECDSA-Sig-Value structure. Given a DER-encoded ECDSA-Sig-Value structure
+This document specifies a new optimal fixed-length encoding for the algorithms. The new encoding is defined as a compression of the DER-encoded ECDSA-Sig-Value structure. Given a DER-encoded ECDSA-Sig-Value structure {{RFC5480}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~
            Ecdsa-Sig-Value ::= SEQUENCE {
@@ -177,7 +178,7 @@ This document specifies a new optimal fixed-length encoding for the algorithms. 
            }
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-the SEQUENCE type, INTEGER type, and length fields are omitted and if necessary the two INTEGER value fields are truncated or left padded with zeroes to the fixed length L. For secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes respectively. The resulting signatures are called ecdsa_secp256r1_sha256_compact, ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes respectively. The new encodings reduce the size of the signatures with an average of 7 bytes. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque signature field contains the compressed Ecdsa-Sig-Value.
+the SEQUENCE type, INTEGER type, and length fields are omitted and if necessary the two INTEGER value fields are truncated (a single zero byte) or left padded with zeroes to the fixed length L. For secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes respectively. The resulting signatures are called ecdsa_secp256r1_sha256_compact, ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes respectively. The new encodings reduce the size of the signatures with an average of 7 bytes. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque signature field contains the compressed Ecdsa-Sig-Value.
 
 | Value | Description | Recommended | Reference |
 | TBD4 | ecdsa_secp256r1_sha256_compact | Y | [This-Document] |
