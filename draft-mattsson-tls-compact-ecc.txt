@@ -4,8 +4,8 @@
 
 Transport Layer Security                               J. Preuß Mattsson
 Internet-Draft                                                  Ericsson
-Intended status: Standards Track                         16 January 2023
-Expires: 20 July 2023
+Intended status: Standards Track                         17 January 2023
+Expires: 21 July 2023
 
 
              Compact ECDHE and ECDSA Encodings for TLS 1.3
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2023.
+   This Internet-Draft will expire on 21 July 2023.
 
 Copyright Notice
 
@@ -101,7 +101,10 @@ Table of Contents
    new encodings.  The new encodings reduce the size of the ECDHE groups
    with 33, 49, and 67 bytes and the ECDSA algorithms with an average of
    7 bytes.  These new encodings also work in DTLS 1.3 [RFC9147] and are
-   especially useful in cTLS [I-D.ietf-tls-ctls].
+   especially useful in cTLS [I-D.ietf-tls-ctls].  When secp256r1 and
+   ecdsa_secp256r1_sha256 are used as a replacement for the the old
+   encdoding such as in the cTLS template-based specialization mechanism
+   they reduce the size of the TLS handshake with on average 80 bytes.
 
 2.  Conventions and Definitions
 
@@ -117,7 +120,7 @@ Table of Contents
    have significant overhead.  This document specifies a new optimal
    fixed-length encoding for the groups.  The new encoding is defined as
    a compression of the UncompressedPointRepresentation structure.
-   Given a UncompressedPointRepresentation structure
+   Given a UncompressedPointRepresentation structure [RFC8446]
 
          struct {
              uint8 legacy_form = 4;
@@ -179,7 +182,7 @@ Table of Contents
    For compatibility with APIs a compressed y-coordinate might be
    required.  For validation or for compatibility with APIs that do not
    support the full [SECG] format an uncompressed y-coordinate might be
-   required:
+   required (using the notation in [SECG]):
 
    *  If a compressed y-coordinate is required, then the value ~yp set
       to zero can be used.  The compact representation described above
@@ -229,7 +232,7 @@ Table of Contents
    This document specifies a new optimal fixed-length encoding for the
    algorithms.  The new encoding is defined as a compression of the DER-
    encoded ECDSA-Sig-Value structure.  Given a DER-encoded ECDSA-Sig-
-   Value structure
+   Value structure [RFC5480]
 
               Ecdsa-Sig-Value ::= SEQUENCE {
                   r       INTEGER,
@@ -237,15 +240,16 @@ Table of Contents
               }
 
    the SEQUENCE type, INTEGER type, and length fields are omitted and if
-   necessary the two INTEGER value fields are truncated or left padded
-   with zeroes to the fixed length L.  For secp256r1, secp384r1, and
-   secp521r1, L is 32, 48, and 66 bytes respectively.  The resulting
-   signatures are called ecdsa_secp256r1_sha256_compact,
-   ecdsa_secp384r1_sha384_compact, and ecdsa_secp521r1_sha512_compact
-   and has length 64, 96, and 132 bytes respectively.  The new encodings
-   reduce the size of the signatures with an average of 7 bytes.  For
-   secp256r1_compact, secp384r1_compact, and secp521r1_compact the
-   opaque signature field contains the compressed Ecdsa-Sig-Value.
+   necessary the two INTEGER value fields are truncated (a single zero
+   byte) or left padded with zeroes to the fixed length L.  For
+   secp256r1, secp384r1, and secp521r1, L is 32, 48, and 66 bytes
+   respectively.  The resulting signatures are called
+   ecdsa_secp256r1_sha256_compact, ecdsa_secp384r1_sha384_compact, and
+   ecdsa_secp521r1_sha512_compact and has length 64, 96, and 132 bytes
+   respectively.  The new encodings reduce the size of the signatures
+   with an average of 7 bytes.  For secp256r1_compact,
+   secp384r1_compact, and secp521r1_compact the opaque signature field
+   contains the compressed Ecdsa-Sig-Value.
 
    +=====+================================+===========+===============+
    |Value| Description                    |Recommended|Reference      |
@@ -317,6 +321,11 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/rfc/rfc2119>.
+
+   [RFC5480]  Turner, S., Brown, D., Yiu, K., Housley, R., and T. Polk,
+              "Elliptic Curve Cryptography Subject Public Key
+              Information", RFC 5480, DOI 10.17487/RFC5480, March 2009,
+              <https://www.rfc-editor.org/rfc/rfc5480>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
