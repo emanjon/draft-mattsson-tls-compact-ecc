@@ -104,7 +104,8 @@ Table of Contents
    especially useful in cTLS [I-D.ietf-tls-ctls].  When secp256r1 and
    ecdsa_secp256r1_sha256 are used as a replacement for the the old
    encdodings they reduce the size of the TLS handshake with on average
-   80 bytes.
+   80 bytes.  The new encodings have the same security properties and
+   requirements as the old encodings.
 
 2.  Conventions and Definitions
 
@@ -116,11 +117,12 @@ Table of Contents
 
 3.  Compact ECDHE Encoding
 
-   The encoding of the ECDHE groups secp256r1, secp384r1, and secp521r1
-   have significant overhead.  This document specifies a new optimal
-   fixed-length encoding for the groups.  The new encoding is defined as
-   a compression of the UncompressedPointRepresentation structure.
-   Given a UncompressedPointRepresentation structure [RFC8446]
+   The encoding specified in [RFC8446] of the ECDHE groups secp256r1,
+   secp384r1, and secp521r1 [RFC8422] have significant overhead.  This
+   document specifies a new optimal fixed-length encoding for the
+   groups.  The new encoding is defined as a compression of the
+   UncompressedPointRepresentation structure.  Given a
+   UncompressedPointRepresentation structure [RFC8446]
 
          struct {
              uint8 legacy_form = 4;
@@ -219,8 +221,8 @@ Table of Contents
 
    Note that this does not guarantee that (x, y) is on the correct
    elliptic curve.  A full validation according to Section 5.6.2.3.3 of
-   [SP-800-56A] can be achieved by also checking that 0 ≤ x < p and that
-   y^2 ≡ x^3 + a ⋅ x + b (mod p).
+   [SP-800-56A] is done by also checking that 0 ≤ x < p and that y^2 ≡
+   x^3 + a ⋅ x + b (mod p).
 
 4.  Compact ECDSA Encoding
 
@@ -232,7 +234,7 @@ Table of Contents
    This document specifies a new optimal fixed-length encoding for the
    algorithms.  The new encoding is defined as a compression of the DER-
    encoded ECDSA-Sig-Value structure.  Given a DER-encoded ECDSA-Sig-
-   Value structure [RFC5480]
+   Value structure [RFC8422]
 
          Ecdsa-Sig-Value ::= SEQUENCE {
              r       INTEGER,
@@ -331,6 +333,12 @@ Table of Contents
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
+
+   [RFC8422]  Nir, Y., Josefsson, S., and M. Pegourie-Gonnard, "Elliptic
+              Curve Cryptography (ECC) Cipher Suites for Transport Layer
+              Security (TLS) Versions 1.2 and Earlier", RFC 8422,
+              DOI 10.17487/RFC8422, August 2018,
+              <https://www.rfc-editor.org/rfc/rfc8422>.
 
    [RFC8446]  Rescorla, E., "The Transport Layer Security (TLS) Protocol
               Version 1.3", RFC 8446, DOI 10.17487/RFC8446, August 2018,
