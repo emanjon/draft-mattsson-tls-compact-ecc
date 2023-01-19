@@ -137,8 +137,9 @@ Table of Contents
              opaque X[coordinate_length];
          } CompactRepresentation;
 
-   The resulting groups are called secp256r1_compact, secp384r1_compact,
-   and secp521r1_compact.  The new encodings have CompactRepresentation
+   Compact representation is explained in [RFC6090].  The resulting
+   groups are called secp256r1_compact, secp384r1_compact, and
+   secp521r1_compact.  The new encodings have CompactRepresentation
    structures of length 32, 48, and 66 bytes, and reduce the size with
    33, 49, and 67 bytes respectively.  For secp256r1_compact,
    secp384r1_compact, and secp521r1_compact the opaque key_exchange
