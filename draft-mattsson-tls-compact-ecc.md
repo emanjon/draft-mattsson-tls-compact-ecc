@@ -230,4 +230,9 @@ IANA is requested to update the TLS SignatureScheme registry {{RFC8447}} under t
 # Acknowledgments
 {:numbered="false"}
 
-The authors want to thank {{{Scott Fluhrer}}} and {{{Erik Thormarker}}} for their valuable comments and feedback.
+The authors want to thank
+{{{Dan Brown}}},
+{{{Scott Fluhrer}}},
+and
+{{{Erik Thormarker}}}
+for their valuable comments and feedback.
