@@ -38,6 +38,7 @@ normative:
   RFC2119:
   RFC5480:
   RFC8174:
+  RFC8422:
   RFC8446:
   RFC8447:
   RFC8447:
@@ -84,7 +85,7 @@ The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and t
 
 # Introduction
 
-The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 have significant overhead and the ECDSA encodings produces variable-length signatures. This document defines new optimal fixed-length encodings and registers new ECDHE groups and ECDSA signature algorithms using these new encodings. The new encodings reduce the size of the ECDHE groups with 33, 49, and 67 bytes and the ECDSA algorithms with an average of 7 bytes. These new encodings also work in DTLS 1.3 {{RFC9147}} and are especially useful in cTLS {{I-D.ietf-tls-ctls}}. When secp256r1 and ecdsa_secp256r1_sha256 are used as a replacement for the the old encdodings they reduce the size of the TLS handshake with on average 80 bytes.
+The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 have significant overhead and the ECDSA encodings produces variable-length signatures. This document defines new optimal fixed-length encodings and registers new ECDHE groups and ECDSA signature algorithms using these new encodings. The new encodings reduce the size of the ECDHE groups with 33, 49, and 67 bytes and the ECDSA algorithms with an average of 7 bytes. These new encodings also work in DTLS 1.3 {{RFC9147}} and are especially useful in cTLS {{I-D.ietf-tls-ctls}}. When secp256r1 and ecdsa_secp256r1_sha256 are used as a replacement for the the old encdodings they reduce the size of the TLS handshake with on average 80 bytes. The new encodings have the same security properties and requirements as the old encodings.
 
 # Conventions and Definitions
 
@@ -92,7 +93,7 @@ The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and t
 
 # Compact ECDHE Encoding
 
-The encoding of the ECDHE groups secp256r1, secp384r1, and secp521r1 have significant overhead. This document specifies a new optimal fixed-length encoding for the groups. The new encoding is defined as a compression of the UncompressedPointRepresentation structure. Given a UncompressedPointRepresentation structure {{RFC8446}}
+The encoding specified in {{RFC8446}} of the ECDHE groups secp256r1, secp384r1, and secp521r1 {{RFC8422}} have significant overhead. This document specifies a new optimal fixed-length encoding for the groups. The new encoding is defined as a compression of the UncompressedPointRepresentation structure. Given a UncompressedPointRepresentation structure {{RFC8446}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~
       struct {
@@ -163,13 +164,13 @@ we can calculate y as the square root w = (x<sup>3</sup> + a {{{⋅}}} x + b)<su
 * y = 834387180070192806820075864918626005281451259964015754
 16632522940595860276856
 
-Note that this does not guarantee that (x, y) is on the correct elliptic curve. A full validation according to Section 5.6.2.3.3 of {{SP-800-56A}} can be achieved by also checking that 0 {{{≤}}} x < p and that y<sup>2</sup> {{{≡}}} x<sup>3</sup> + a {{{⋅}}} x + b (mod p).
+Note that this does not guarantee that (x, y) is on the correct elliptic curve. A full validation according to Section 5.6.2.3.3 of {{SP-800-56A}} is done by also checking that 0 {{{≤}}} x < p and that y<sup>2</sup> {{{≡}}} x<sup>3</sup> + a {{{⋅}}} x + b (mod p).
 
 # Compact ECDSA Encoding
 
 The variable-length encoding of the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 specified in {{RFC8446}} have significant overhead.
 
-This document specifies a new optimal fixed-length encoding for the algorithms. The new encoding is defined as a compression of the DER-encoded ECDSA-Sig-Value structure. Given a DER-encoded ECDSA-Sig-Value structure {{RFC5480}}
+This document specifies a new optimal fixed-length encoding for the algorithms. The new encoding is defined as a compression of the DER-encoded ECDSA-Sig-Value structure. Given a DER-encoded ECDSA-Sig-Value structure {{RFC8422}}
 
 ~~~~~~~~~~~~~~~~~~~~~~~
       Ecdsa-Sig-Value ::= SEQUENCE {
