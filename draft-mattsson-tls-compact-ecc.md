@@ -164,7 +164,7 @@ we can calculate y as the square root w = (x<sup>3</sup> + a {{{⋅}}} x + b)<su
 * y = 834387180070192806820075864918626005281451259964015754
 16632522940595860276856
 
-Note that this does not guarantee that (x, y) is on the correct elliptic curve. A full validation according to Section 5.6.2.3.3 of {{SP-800-56A}} is done by also checking that 0 {{{≤}}} x < p and that y<sup>2</sup> {{{≡}}} x<sup>3</sup> + a {{{⋅}}} x + b (mod p).
+Note that this does not guarantee that (x, y) is on the correct elliptic curve. A full validation according to Section 5.6.2.3.3 of {{SP-800-56A}} is done by also checking that 0 {{{≤}}} x < p and that y<sup>2</sup> {{{≡}}} x<sup>3</sup> + a {{{⋅}}} x + b (mod p). The implementation MUST perform public-key validation.
 
 # Compact ECDSA Encoding
 
@@ -217,8 +217,7 @@ The following shows an example compact ECDSA encoding. {{ecdsa-old}} shows a 71 
 
 # Security Considerations
 
-Compact representation of a ECDHE key share produces the same shared secret as the uncompressed encoding and does not change any requirements on point validation. Using compact representation has some security benefits. As described in {{SafeCurves}} it helps to protect against invalid-curve attacks as an implementation will naturally detect invalid inputs when it reconstructs the missing coordinate. As not even the sign of the y-coordinate is encoded, compact representation trivially avoids so called "benign malleability" attacks where an attacker changes the sign, see {{SECG}}.
-
+The new encodings are just encodings and have the same security properties and security requirements as the old encodings. Compact representation of a ECDHE key share produces the same shared secret as the uncompressed encoding and does not change any requirements on point validation, the peers MUST validate each other's public key shares.
 
 # IANA Considerations
 
