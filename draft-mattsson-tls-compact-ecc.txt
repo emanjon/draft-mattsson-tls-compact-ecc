@@ -137,14 +137,13 @@ Table of Contents
              opaque X[coordinate_length];
          } CompactRepresentation;
 
-   Compact representation is explained in [RFC6090].  The resulting
-   groups are called secp256r1_compact, secp384r1_compact, and
-   secp521r1_compact.  The new encodings have CompactRepresentation
+   The resulting groups are called secp256r1_compact, secp384r1_compact,
+   and secp521r1_compact.  The new encodings have CompactRepresentation
    structures of length 32, 48, and 66 bytes, and reduce the size with
    33, 49, and 67 bytes respectively.  For secp256r1_compact,
    secp384r1_compact, and secp521r1_compact the opaque key_exchange
    field contains the serialized value of the CompactRepresentation
-   struct:
+   struct.
 
        +=======+===================+=============+=================+
        | Value | Description       | Recommended | Reference       |
@@ -157,6 +156,11 @@ Table of Contents
        +-------+-------------------+-------------+-----------------+
 
                        Table 1: Compact ECDHE Groups
+
+   The difference between compact representation [RFC6090] and point
+   compression [SECG]) is that point compression also communicates the
+   sign bit of the y-coordinate along with the x-coordinate while
+   compact representation only transmits the x-coordinate.
 
 3.1.  Example Compact ECDHE Encoding
 
