@@ -1341,7 +1341,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 16632522940595860276856<a href="#section-3.2-8.1" class="pilcrow">¶</a>
 </li>
         </ul>
-<p id="section-3.2-9">Note that this does not guarantee that (x, y) is on the correct elliptic curve. A full validation according to Section 5.6.2.3.3 of <span>[<a href="#SP-800-56A" class="cite xref">SP-800-56A</a>]</span> is done by also checking that 0 <span class="contact-name">≤</span> x &lt; p and that y<sup>2</sup> <span class="contact-name">≡</span> x<sup>3</sup> + a <span class="contact-name">⋅</span> x + b (mod p).<a href="#section-3.2-9" class="pilcrow">¶</a></p>
+<p id="section-3.2-9">Note that this does not guarantee that (x, y) is on the correct elliptic curve. A full validation according to Section 5.6.2.3.3 of <span>[<a href="#SP-800-56A" class="cite xref">SP-800-56A</a>]</span> is done by also checking that 0 <span class="contact-name">≤</span> x &lt; p and that y<sup>2</sup> <span class="contact-name">≡</span> x<sup>3</sup> + a <span class="contact-name">⋅</span> x + b (mod p). The implementation <span class="bcp14">MUST</span> perform public-key validation.<a href="#section-3.2-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1447,7 +1447,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-security-considerations">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-5-1">Compact representation of a ECDHE key share produces the same shared secret as the uncompressed encoding and does not change any requirements on point validation. Using compact representation has some security benefits. As described in <span>[<a href="#SafeCurves" class="cite xref">SafeCurves</a>]</span> it helps to protect against invalid-curve attacks as an implementation will naturally detect invalid inputs when it reconstructs the missing coordinate. As not even the sign of the y-coordinate is encoded, compact representation trivially avoids so called "benign malleability" attacks where an attacker changes the sign, see <span>[<a href="#SECG" class="cite xref">SECG</a>]</span>.<a href="#section-5-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The new encodings are just encodings and have the same security properties and security requirements as the old encodings. Compact representation of a ECDHE key share produces the same shared secret as the uncompressed encoding and does not change any requirements on point validation, the peers <span class="bcp14">MUST</span> validate each other's public key shares.<a href="#section-5-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
