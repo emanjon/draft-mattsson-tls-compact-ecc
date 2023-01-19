@@ -52,11 +52,6 @@ informative:
     title: Standards for Efficient Cryptography 1 (SEC 1)
     date: May 2009
 
-  SafeCurves:
-    target: https://safecurves.cr.yp.to/twist.html
-    title: "SafeCurves: choosing safe curves for elliptic-curve cryptography"
-    date: January 2017
-
   SP-800-56A:
     target: https://doi.org/10.6028/NIST.SP.800-56Ar3
     title: Recommendation for Pair-Wise Key-Establishment Schemes Using Discrete Logarithm Cryptography
