@@ -36,7 +36,6 @@ author:
 normative:
 
   RFC2119:
-  RFC5480:
   RFC8174:
   RFC8422:
   RFC8446:
