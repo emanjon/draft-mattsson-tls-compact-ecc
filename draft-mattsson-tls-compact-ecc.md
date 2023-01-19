@@ -104,14 +104,15 @@ the legacy_form and Y field are omitted to create a CompactRepresentation struct
           opaque X[coordinate_length];
       } CompactRepresentation;
 ~~~~~~~~~~~~~~~~~~~~~~~
-
-Compact representation is explained in {{RFC6090}}. The resulting groups are called secp256r1_compact, secp384r1_compact, and secp521r1_compact. The new encodings have CompactRepresentation structures of length 32, 48, and 66 bytes, and reduce the size with 33, 49, and 67 bytes respectively. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque key_exchange field contains the serialized value of the CompactRepresentation struct:
+The resulting groups are called secp256r1_compact, secp384r1_compact, and secp521r1_compact. The new encodings have CompactRepresentation structures of length 32, 48, and 66 bytes, and reduce the size with 33, 49, and 67 bytes respectively. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque key_exchange field contains the serialized value of the CompactRepresentation struct.
 
 | Value | Description | Recommended | Reference |
 | TBD1 | secp256r1_compact | Y | [This-Document] |
 | TBD2 | secp384r1_compact | Y | [This-Document] |
 | TBD3 | secp521r1_compact | Y | [This-Document] |
 {: #ecdhe-table title="Compact ECDHE Groups" cols="r l r l"}
+
+The difference between compact representation {{RFC6090}} and point compression {{SECG}}) is that point compression also communicates the sign bit of the y-coordinate along with the x-coordinate while compact representation only transmits the x-coordinate.
 
 ## Example Compact ECDHE Encoding
 
