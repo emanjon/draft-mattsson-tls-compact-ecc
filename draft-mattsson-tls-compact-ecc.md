@@ -40,7 +40,7 @@ normative:
   RFC8422:
   RFC8446:
   RFC8447:
-  RFC8447:
+
 informative:
 
   RFC6090:
@@ -105,7 +105,7 @@ the legacy_form and Y field are omitted to create a CompactRepresentation struct
       } CompactRepresentation;
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-The resulting groups are called secp256r1_compact, secp384r1_compact, and secp521r1_compact. The new encodings have CompactRepresentation structures of length 32, 48, and 66 bytes, and reduce the size with 33, 49, and 67 bytes respectively. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque key_exchange field contains the serialized value of the CompactRepresentation struct:
+Compact representation is explained in {{RFC6090}}. The resulting groups are called secp256r1_compact, secp384r1_compact, and secp521r1_compact. The new encodings have CompactRepresentation structures of length 32, 48, and 66 bytes, and reduce the size with 33, 49, and 67 bytes respectively. For secp256r1_compact, secp384r1_compact, and secp521r1_compact the opaque key_exchange field contains the serialized value of the CompactRepresentation struct:
 
 | Value | Description | Recommended | Reference |
 | TBD1 | secp256r1_compact | Y | [This-Document] |
