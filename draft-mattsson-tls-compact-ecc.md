@@ -137,7 +137,7 @@ The following shows an example compact ECDHE encoding. {{ecdhe-old}} shows a 65 
 
 ## Implementation Considerations for Compact Representation
 
-For compatibility with APIs a compressed y-coordinate might be required. For validation or for compatibility with APIs that do not support the full {{SECG}} format an uncompressed y-coordinate might be required (using the notation in {{SECG}}):
+For compatibility with APIs a compressed y-coordinate might be required. For compatibility with APIs that do not support the full {{SECG}} format an uncompressed y-coordinate might be required. For point validation an uncompressed y-coordinate is required. Using the notation in {{SECG}}:
 
 * If a compressed y-coordinate is required, then the value ~yp set to zero can be used. The compact representation described above can in such a case be transformed into the SECG point compressed format by prepending X with the single byte 0x02 (i.e., M = 0x02 \|\| X).
 * If an uncompressed y-coordinate is required, then a y-coordinate has to be calculated following Section 2.3.4 of {{SECG}} or Appendix C of {{RFC6090}}. Any of the square roots (see {{SECG}} or {{RFC6090}}) can be used. The uncompressed SECG format is M = 0x04 \|\| X \|\| Y.
