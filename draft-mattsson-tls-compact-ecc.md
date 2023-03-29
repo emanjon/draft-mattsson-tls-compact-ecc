@@ -116,7 +116,7 @@ The difference between compact representation {{RFC6090}} and point compression 
 
 ## Example Compact ECDHE Encoding
 
-The following shows an example compact ECDHE encoding. {{ecdhe-old}} shows a 65 bytes ecdsa_secp256r1_sha256 UncompressedPointRepresentation structure.
+The following shows an example compact ECDHE encoding. {{ecdhe-old}} shows a 65 bytes secp256r1 UncompressedPointRepresentation structure.
 
 ~~~~~~~~~~~~~~~~~~~~~~~
           04 A6 DA 73 92 EC 59 1E 17 AB FD 53 59 64 B9 98
