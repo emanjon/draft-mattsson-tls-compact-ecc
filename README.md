@@ -2,7 +2,8 @@
 
 This is the working area for the individual Internet-Draft, "Compact ECDHE and ECDSA Encodings for TLS 1.3".
 
-* [Editor's Copy](https://emanjon.github.io/draft-mattsson-tls-compact-ecc/#go.draft-mattsson-tls-compact-ecc.html)
+* [Editor's Copy HTML](https://emanjon.github.io/draft-mattsson-tls-compact-ecc/#go.draft-mattsson-tls-compact-ecc.html)
+* [Editor's Copy Text](https://emanjon.github.io/draft-mattsson-tls-compact-ecc/#go.draft-mattsson-tls-compact-ecc.txt)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-mattsson-tls-compact-ecc)
 * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-mattsson-tls-compact-ecc)
 * [Compare Editor's Copy to Individual Draft](https://emanjon.github.io/draft-mattsson-tls-compact-ecc/#go.draft-mattsson-tls-compact-ecc.diff)
