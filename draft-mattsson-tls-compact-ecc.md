@@ -32,7 +32,9 @@ author:
   street: SE-164 80 Stockholm
   country: Sweden
   email: john.mattsson@ericsson.com
-
+- name: Hannes Tschofenig
+  organization:
+  email: Hannes.Tschofenig@gmx.net
 normative:
 
   RFC2119:
