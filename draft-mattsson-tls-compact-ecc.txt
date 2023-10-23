@@ -377,8 +377,8 @@ Table of Contents
 
 Acknowledgments
 
-   The authors want to thank Dan Brown, Scott Fluhrer, Erik Thormarker,
-   and Hannes Tschofenig for their valuable comments and feedback.
+   The authors want to thank Dan Brown, Scott Fluhrer, and Erik
+   Thormarker for their valuable comments and feedback.
 
 Authors' Addresses
 
