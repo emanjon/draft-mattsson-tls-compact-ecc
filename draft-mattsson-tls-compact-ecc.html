@@ -6,31 +6,30 @@
 <meta content="initial-scale=1.0" name="viewport">
 <title>Compact ECDHE and ECDSA Encodings for TLS 1.3</title>
 <meta content="John Preuß Mattsson" name="author">
+<meta content="Hannes Tschofenig" name="author">
 <meta content="
        The encodings used in the ECDHE groups secp256r1, secp384r1, and secp521r1 and the ECDSA signature algorithms ecdsa_secp256r1_sha256, ecdsa_secp384r1_sha384, and ecdsa_secp521r1_sha512 have significant overhead and the ECDSA encoding produces variable-length signatures. This document defines new optimal fixed-length encodings and registers new ECDHE groups and ECDSA signature algorithms using these new encodings. The new encodings reduce the size of the ECDHE groups with 33, 49, and 67 bytes and the ECDSA algorithms with an average of 7 bytes. These new encodings also work in DTLS 1.3 and are especially useful in cTLS. 
     " name="description">
-<meta content="xml2rfc 3.17.0" name="generator">
+<meta content="xml2rfc 3.18.2" name="generator">
 <meta content="next generation" name="keyword">
 <meta content="unicorn" name="keyword">
 <meta content="sparkling distributed ledger" name="keyword">
 <meta content="draft-mattsson-tls-compact-ecc-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.17.0
-    Python 3.10.10
-    appdirs 1.4.4
+  xml2rfc 3.18.2
+    Python 3.11.6
     ConfigArgParse 1.5.3
-    google-i18n-address 2.5.2
-    html5lib 1.1
+    google-i18n-address 3.1.0
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.2
-    MarkupSafe 2.1.1
+    lxml 4.9.3
+    platformdirs 3.11.0
     pycountry 22.3.5
     PyYAML 6.0
-    requests 2.28.1
-    setuptools 65.6.0
+    requests 2.31.0
+    setuptools 67.7.2
     six 1.16.0
-    wcwidth 0.2.6
+    wcwidth 0.2.8
 -->
 <link href="draft-mattsson-tls-compact-ecc.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -612,6 +611,7 @@ sub, sup {
   clear: left;
   float: left;
   text-align: right;
+  margin-right: 1ch;
 }
 #identifiers dd {
   margin: 0;
@@ -652,7 +652,7 @@ sub, sup {
 }
 #toc nav li {
   line-height: 1.3em;
-  margin: 0.75em 0;
+  margin: 2px 0;
   padding-left: 1.2em;
   text-indent: -1.2em;
 }
@@ -663,7 +663,8 @@ sub, sup {
 .references dt {
   text-align: right;
   font-weight: bold;
-  min-width: 7em;
+  min-width: 10ch;
+  margin-right: 1.5ch;
 }
 .references dt:target::before {
   content: "⇒";
@@ -671,7 +672,7 @@ sub, sup {
   margin: 0 10px 0 -25px;
 }
 .references dd {
-  margin-left: 8em !important;
+  margin-left: 12ch !important;
   overflow: auto;
 }
 
@@ -744,7 +745,7 @@ hr.addr {
     z-index: 2;
     top: 0;
     right: 0;
-    padding: 0;
+    padding: 1px 0 0 0;
     margin: 0;
     border-bottom: 1px solid #ccc;
     opacity: 0.6;
@@ -868,16 +869,13 @@ hr.addr {
     border-top: none;
     padding-top: 0;
   }
-  figure, pre {
+  figure, pre, .vcard {
     page-break-inside: avoid;
-  }
-  figure {
-    overflow: scroll;
   }
   h1, h2, h3, h4, h5, h6 {
     page-break-after: avoid;
   }
-  h2+*, h3+*, h4+*, h5+*, h6+* {
+  :is(h2, h3, h4, h5, h6)+*, dd {
     page-break-before: avoid;
   }
   pre {
@@ -890,6 +888,9 @@ hr.addr {
   }
   td {
     border-top: 1px solid #ddd;
+  }
+  .toplink {
+    display: none;
   }
 }
 
@@ -991,28 +992,6 @@ address div.right {
   text-align: right;
 }
 
-/* Give the table caption label the same styling as the figcaption */
-
-@media print {
-  .toplink {
-    display: none;
-  }
-
-  /* avoid overwriting the top border line with the ToC header */
-  #toc {
-    padding-top: 1px;
-  }
-
-  /* Avoid page breaks inside dl and author address entries */
-  dd {
-    page-break-before: avoid;
-  }
-  .vcard {
-    page-break-inside: avoid;
-  }
-
-}
-
 /* Dark mode. */
 @media (prefers-color-scheme: dark) {
 :root {
@@ -1049,11 +1028,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">Compact ECDSA and ECDHE</td>
-<td class="right">March 2023</td>
+<td class="right">October 2023</td>
 </tr></thead>
 <tfoot><tr>
-<td class="left">Preuß Mattsson</td>
-<td class="center">Expires 30 September 2023</td>
+<td class="left">Preuß Mattsson &amp; Tschofenig</td>
+<td class="center">Expires 25 April 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1066,17 +1045,20 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-mattsson-tls-compact-ecc-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-03-29" class="published">29 March 2023</time>
+<time datetime="2023-10-23" class="published">23 October 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-09-30">30 September 2023</time></dd>
-<dt class="label-authors">Author:</dt>
+<dd class="expires"><time datetime="2024-04-25">25 April 2024</time></dd>
+<dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
       <div class="author-name">J. Preuß Mattsson</div>
 <div class="org">Ericsson</div>
+</div>
+<div class="author">
+      <div class="author-name">H. Tschofenig</div>
 </div>
 </dd>
 </dl>
@@ -1121,7 +1103,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 30 September 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 25 April 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1196,7 +1178,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.8.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-address" class="internal xref">Author's Address</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1325,31 +1307,38 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         </h3>
 <p id="section-3.2-1">For compatibility with APIs a compressed y-coordinate might be required. For compatibility with APIs that do not support the full <span>[<a href="#SECG" class="cite xref">SECG</a>]</span> format an uncompressed y-coordinate might be required. For point validation an uncompressed y-coordinate is required. Using the notation in <span>[<a href="#SECG" class="cite xref">SECG</a>]</span>:<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-2.1">If a compressed y-coordinate is required, then the value ~yp set to zero can be used. The compact representation described above can in such a case be transformed into the SECG point compressed format by prepending X with the single byte 0x02 (i.e., M = 0x02 || X).<a href="#section-3.2-2.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.2-2.1">
+            <p id="section-3.2-2.1.1">If a compressed y-coordinate is required, then the value ~yp set to zero can be used. The compact representation described above can in such a case be transformed into the SECG point compressed format by prepending X with the single byte 0x02 (i.e., M = 0x02 || X).<a href="#section-3.2-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-2.2">If an uncompressed y-coordinate is required, then a y-coordinate has to be calculated following Section 2.3.4 of <span>[<a href="#SECG" class="cite xref">SECG</a>]</span> or Appendix C of <span>[<a href="#RFC6090" class="cite xref">RFC6090</a>]</span>. Any of the square roots (see <span>[<a href="#SECG" class="cite xref">SECG</a>]</span> or <span>[<a href="#RFC6090" class="cite xref">RFC6090</a>]</span>) can be used. The uncompressed SECG format is M = 0x04 || X || Y.<a href="#section-3.2-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.2-2.2">
+            <p id="section-3.2-2.2.1">If an uncompressed y-coordinate is required, then a y-coordinate has to be calculated following Section 2.3.4 of <span>[<a href="#SECG" class="cite xref">SECG</a>]</span> or Appendix C of <span>[<a href="#RFC6090" class="cite xref">RFC6090</a>]</span>. Any of the square roots (see <span>[<a href="#SECG" class="cite xref">SECG</a>]</span> or <span>[<a href="#RFC6090" class="cite xref">RFC6090</a>]</span>) can be used. The uncompressed SECG format is M = 0x04 || X || Y.<a href="#section-3.2-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.2-3">For example: The curve P-256 has the parameters (using the notation in <span>[<a href="#RFC6090" class="cite xref">RFC6090</a>]</span>)<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-4.1">p = 2<sup>256</sup> - 2<sup>224</sup> + 2<sup>192</sup> + 2<sup>96</sup> - 1<a href="#section-3.2-4.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.2-4.1">
+            <p id="section-3.2-4.1.1">p = 2<sup>256</sup> − 2<sup>224</sup> + 2<sup>192</sup> + 2<sup>96</sup> − 1<a href="#section-3.2-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-4.2">a = -3<a href="#section-3.2-4.2" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.2-4.2">
+            <p id="section-3.2-4.2.1">a = -3<a href="#section-3.2-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-3.2-4.3">b = 410583637251521421293261297800472684091144410159937255
-54835256314039467401291<a href="#section-3.2-4.3" class="pilcrow">¶</a>
+          <li class="normal" id="section-3.2-4.3">
+            <p id="section-3.2-4.3.1">b = 410583637251521421293261297800472684091144410159937255
+54835256314039467401291<a href="#section-3.2-4.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.2-5">Given an example x:<a href="#section-3.2-5" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-6.1">x = 115792089183396302095546807154740558443406795108653336
-398970697772788799766525<a href="#section-3.2-6.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.2-6.1">
+            <p id="section-3.2-6.1.1">x = 115792089183396302095546807154740558443406795108653336
+398970697772788799766525<a href="#section-3.2-6.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.2-7">we can calculate y as the square root w = (x<sup>3</sup> + a <span class="contact-name">⋅</span> x + b)<sup>((p + 1)/4)</sup> (mod p)<a href="#section-3.2-7" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-3.2-8.1">y = 834387180070192806820075864918626005281451259964015754
-16632522940595860276856<a href="#section-3.2-8.1" class="pilcrow">¶</a>
+<li class="normal" id="section-3.2-8.1">
+            <p id="section-3.2-8.1.1">y = 834387180070192806820075864918626005281451259964015754
+16632522940595860276856<a href="#section-3.2-8.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-3.2-9">Note that this does not guarantee that (x, y) is on the correct elliptic curve. A full validation according to Section 5.6.2.3.3 of <span>[<a href="#SP-800-56A" class="cite xref">SP-800-56A</a>]</span> is done by also checking that 0 <span class="contact-name">≤</span> x &lt; p and that y<sup>2</sup> <span class="contact-name">≡</span> x<sup>3</sup> + a <span class="contact-name">⋅</span> x + b (mod p). The implementation <span class="bcp14">MUST</span> perform public-key validation.<a href="#section-3.2-9" class="pilcrow">¶</a></p>
@@ -1474,6 +1463,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
       <h2 id="name-references">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
+<div id="sec-normative-references">
 <section id="section-7.1">
         <h3 id="name-normative-references">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
@@ -1501,6 +1491,8 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
+<div id="sec-informative-references">
 <section id="section-7.2">
         <h3 id="name-informative-references">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
@@ -1508,7 +1500,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <dl class="references">
 <dt id="I-D.ietf-tls-ctls">[I-D.ietf-tls-ctls]</dt>
         <dd>
-<span class="refAuthor">Rescorla, E.</span>, <span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">B. M. Schwartz</span>, <span class="refTitle">"Compact TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-ctls-08</span>, <time datetime="2023-03-13" class="refDate">13 March 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-ctls-08">https://datatracker.ietf.org/doc/html/draft-ietf-tls-ctls-08</a>&gt;</span>. </dd>
+<span class="refAuthor">Rescorla, E.</span>, <span class="refAuthor">Barnes, R.</span>, <span class="refAuthor">Tschofenig, H.</span>, and <span class="refAuthor">B. M. Schwartz</span>, <span class="refTitle">"Compact TLS 1.3"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tls-ctls-09</span>, <time datetime="2023-10-23" class="refDate">23 October 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tls-ctls-09">https://datatracker.ietf.org/doc/html/draft-ietf-tls-ctls-09</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC6090">[RFC6090]</dt>
         <dd>
@@ -1528,6 +1520,7 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
 <dd class="break"></dd>
 </dl>
 </section>
+</div>
 </section>
 <div id="acknowledgments">
 <section id="appendix-A">
@@ -1545,8 +1538,8 @@ for their valuable comments and feedback.<a href="#appendix-A-1" class="pilcrow"
 </div>
 <div id="authors-addresses">
 <section id="appendix-B">
-      <h2 id="name-authors-address">
-<a href="#name-authors-address" class="section-name selfRef">Author's Address</a>
+      <h2 id="name-authors-addresses">
+<a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">John Preuß Mattsson</span></div>
@@ -1556,6 +1549,13 @@ for their valuable comments and feedback.<a href="#appendix-A-1" class="pilcrow"
 <div class="email">
 <span>Email:</span>
 <a href="mailto:john.mattsson@ericsson.com" class="email">john.mattsson@ericsson.com</a>
+</div>
+</address>
+<address class="vcard">
+        <div dir="auto" class="left"><span class="fn nameRole">Hannes Tschofenig</span></div>
+<div class="email">
+<span>Email:</span>
+<a href="mailto:Hannes.Tschofenig@gmx.net" class="email">Hannes.Tschofenig@gmx.net</a>
 </div>
 </address>
 </section>
