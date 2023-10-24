@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-22T00:28:16.091983+00:00",
+  "timestamp": "2023-10-24T00:26:12.977464+00:00",
   "repo": "emanjon/draft-mattsson-tls-compact-ecc",
   "labels": [
     {
@@ -67,5 +67,48 @@
       "comments": []
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOIya-d85dgHps",
+      "title": "Update draft-mattsson-tls-compact-ecc.md",
+      "url": "https://github.com/emanjon/draft-mattsson-tls-compact-ecc/pull/2",
+      "state": "MERGED",
+      "author": "hannestschofenig",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-10-23T08:27:12Z",
+      "updatedAt": "2023-10-23T20:07:11Z",
+      "baseRepository": "emanjon/draft-mattsson-tls-compact-ecc",
+      "baseRefName": "main",
+      "baseRefOid": "edab2ef099dc2f23de70824eaf01130d7bfdffe3",
+      "headRepository": "hannestschofenig/draft-mattsson-tls-compact-ecc",
+      "headRefName": "patch-1",
+      "headRefOid": "88824767ec5658aa8f128bc4e54a289944b6161c",
+      "closedAt": "2023-10-23T20:07:11Z",
+      "mergedAt": "2023-10-23T20:07:11Z",
+      "mergedBy": "emanjon",
+      "mergeCommit": {
+        "oid": "6274c6116de9e71f4529f032ae7d7b791ad7a695"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOIya-d85k79GY",
+          "commit": {
+            "abbreviatedOid": "8882476"
+          },
+          "author": "emanjon",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-10-23T20:06:47Z",
+          "updatedAt": "2023-10-23T20:06:47Z",
+          "comments": []
+        }
+      ]
+    }
+  ]
 }
