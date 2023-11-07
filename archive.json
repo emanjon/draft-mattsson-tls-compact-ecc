@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-10-24T00:26:12.977464+00:00",
+  "timestamp": "2023-11-07T00:26:49.832282+00:00",
   "repo": "emanjon/draft-mattsson-tls-compact-ecc",
   "labels": [
     {
@@ -75,7 +75,7 @@
       "url": "https://github.com/emanjon/draft-mattsson-tls-compact-ecc/pull/2",
       "state": "MERGED",
       "author": "hannestschofenig",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
